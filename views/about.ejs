@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .mid-area div{
+                margin-top:45px;
+                margin-left:35px;
+                margin-right:35px;
+            }
+            .mid-area h3{
+                font-size: 30px;
+                padding-bottom:15px;  
+            }
+            .mid-area p{
+                line-height: 2em;
+                font-size: 20px;
+            }
+            .mid-area li{
+                line-height: 2em;
+                font-size: 19px;
+                margin-left:45px;
+                margin-right:40px;
+            }
+           .login{
+                border:4px salmon;
+                width:20%;
+                height:16vh;
+                margin-left:40%;
+                margin-top: 45px;
+                margin-bottom: 45px;
+                background-color:rgba(190, 42, 42, 0.868);
+
+            }
+            .login p{
+                font-size:20px;
+                text-align:center;
+                color:white;
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+            .login button{
+                padding-top:1%;
+                padding-left:1%;
+                padding-right:1%;
+                padding-bottom:1%;
+                margin-left:60px;
+                background:transparent;
+                color:black;
+                font-size:20px;
+           
+                cursor:pointer;
+            }
+            .login button:hover{
+                transition: 2s;
+                background-color:#299acac9;
+                color:white;
+            }
+        </style>
+    </head>
+    <body>
+        <%- include ('reusables/header')%>
+        <section class="mid-area">
+            <div class="div1">
+                <h3>What is StrathBud?</h3>
+                <p> StrathBud is a comprehensive online platform designed specifically for the Strathmore University community.
+                    It serves as a central hub where students can seamlessly access and manage information related to various 
+                    aspects of campus life. From sports and clubs to social amenities and public relations,
+                    StrathBud provides an intuitive interface that allows users to stay updated on events,
+                    join activities, and access essential services. The platform also facilitates student feedback and grievances,
+                    ensuring a responsive and inclusive campus environment. By integrating these diverse modules,
+                    StrathBud aims to enhance the overall university experience, fostering a connected and engaged community.
+
+                </p>
+            </div>
+            <div class="div2">
+                <h3>How did StrathBud come about?</h3>
+                <p> 
+                    StrathBud was conceived as a solution to the communication challenges faced by Strathmore University. 
+                    The university traditionally relied on email to disseminate information about both academic and extracurricular
+                    activities. However, the sheer volume of emails led to information overload among students, causing many important
+                    messages to be overlooked. This inefficacy of email communication meant that students were missing out on vital
+                    opportunities and event notifications. Recognizing these issues, StrathBud was developed to provide a more 
+                    engaging and user-friendly platform for sharing information. By integrating various modules that cater to 
+                    sports, clubs, social amenities, public relations, and feedback, StrathBud aims to create a cohesive and interactive communication hub
+                    that actively involves students and enhances their overall university experience.
+                </p>
+            </div>
+            <div class="div3">
+                <h3>What services does Strathbud offer?</h3>
+                <p>
+                    StrathBud offers a comprehensive suite of features designed to enhance the campus experience for students at Strathmore University. 
+                    Key offerings include:
+                    <ul class="services">
+                        <li> 
+                            A dedicated section for all university sports, providing information on sports leaders,
+                             venues, practice days, and a sign-up form for students wishing to join.
+                             It also displays upcoming sports events.
+                        </li>
+                        <li>
+                            A module with all the clubs and societies within the university, detailing their leaders, meet-up days, and venues.
+                            Students can easily sign up to join their preferred clubs and societies.
+                        </li>
+                        <li>
+                            A resourceful guide to the university's restaurants, including their locations, menus, and current offers. 
+                            It also covers other essential services such as health facilities and relevant announcements.
+                        </li>
+                        <li>
+                            A platform for all school announcements and events, including concerts, movies, and business fairs. 
+                            Admins can upload posters and provide brief descriptions of events, ensuring the community stays informed
+                            and engaged.
+                        </li>
+                        <li>
+                            A channel for students to voice their grievances and provide feedback on upcoming school projects. 
+                            It includes tools for questionnaires, polls, and surveys to gather valuable student input.
+                        </li>
+                    </ul>
+                </p>
+            </div>
+           
+
+        </section>
+        <div class="login">
+            <p>WANT TO LOG IN?</p>
+            <a href="/Strathbud/Login"><button>LOG IN</button></a>
+        </div>
+        <%- include ('reusables/footer')%>
+    </body>
+</html>

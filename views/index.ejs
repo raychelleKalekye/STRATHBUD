@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+            .mid_section{
+         
+                background-image: url('web-design-2906159_1920.jpg');
+                height:70vh;
+                
+            }
+            .mid_section button{
+                padding-top:1%;
+                padding-left:1%;
+                padding-right:1%;
+                padding-bottom:1%;
+                background:transparent;
+                color:black;
+                font-size:20px;
+                margin-top:20%;
+                cursor:pointer;
+            }
+            .mid_section button:hover{
+                transition: 2s;
+                background-color:#299acac9;
+                color:white;
+            }
+
+        </style>
+    </head>
+    <body>
+        <%- include ('reusables/header')%>
+
+        <section class="mid_section">
+            <a href="/Strathbud/Login"><button>LOG IN</button></a>
+        </section>
+
+        <%- include ('reusables/footer')%>
+    </body>
+</html>
