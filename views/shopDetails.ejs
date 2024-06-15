@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+       body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        color: #333;
+            }
+
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                height:auto;
+            }
+
+            .event-header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .event-header h1 {
+                font-size: 2.5em;
+                color: #333;
+                margin: 0;
+                text-transform: uppercase;
+            }
+
+            .event-details {
+                    display: flex;
+                    flex-wrap: wrap;
+                    background: #fff;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+
+                .event-poster {
+                    flex: 0 1 300px; /* Adjust the width of the poster */
+                    text-align: center;
+                    margin-right: 20px;
+                }
+
+                .event-poster img {
+                    max-width: 100%;
+                    border-radius: 8px;
+                }
+
+                .event-info {
+                    flex: 1 1 400px; /* Adjust the width of the event details */
+                }
+
+
+            .event-info {
+                flex: 2 1 400px;
+            }
+
+            .event-info p {
+                font-size: 1.2em;
+                margin: 10px 0;
+                max-width: 600px;
+            }
+
+            .event-info strong {
+                color: rgba(144, 18, 18, 0.868);
+            }
+
+            .event-footer {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .back-button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007BFF;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 8px;
+                transition: background-color 0.3s;
+            }
+
+            .back-button:hover {
+                background-color: #0056b3;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <%- include ('reusables/header')%>
+        <div class="container">
+            <header class="event-header">
+                <h1><%= shopsData.shopName %></h1>
+            </header>
+            <div class="event-details">
+              
+                <div class="event-info">
+                    <p><strong>Services Offered:</strong> <%= shopsData.servicesOffered %></p>
+                   
+                    <p><strong>Location:</strong> <%= shopsData.Location %></p>
+                    
+                </div>
+            </div>
+            <footer class="event-footer">
+                <a href="/Strathbud/SocialAmenities/Shops" class="back-button">Back to Shops</a>
+            </footer>
+        </div>
+        
+   
+        <%- include ('reusables/footer')%>
+    </body>
+</html>

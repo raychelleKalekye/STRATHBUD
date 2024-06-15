@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+      
+    <head>
+                
+    <title><%= title %></title>     
+        
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+        .form4 {
+                position: relative;
+                width: 350px;
+                height: auto;
+                border-radius: 20px;
+                padding: 40px;
+                box-sizing: border-box;
+                background: #ecf0f3;
+                box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+                margin-left: 40%;
+                margin-top:5%;
+                margin-bottom:5%;
+        }
+        .data input{
+           color: red;
+           text-align: left;
+           margin-top: 30px;
+           background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+        }
+        .brand-logo {
+            height: 100px;
+            width: 100px;
+            
+            margin: auto;
+            border-radius: 50%;
+            box-sizing: border-box;
+            box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+            label {
+            margin-bottom: 4px;
+            }
+
+            label:nth-of-type(2) {
+            margin-top: 12px;
+            }
+        .brand-title {
+            margin-top: 10px;
+            font-weight: 400;
+            font-size: 1.5rem;
+            color: #1DA1F2;
+            letter-spacing: 1px;
+        }
+        button {
+            color: white;
+            margin-top: 20px;
+            background: #1DA1F2;
+            height: 40px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 900;
+            box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+            transition: 0.5s;
+            }
+
+            button:hover {
+            box-shadow: none;
+            }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .event {
+            border: 1px solid #ccc;
+            margin: auto;
+            padding: 10px;
+            border-radius: 5px;
+            padding: 10px;
+            transition: border-color 0.3s, transform 0.3s;
+        
+        }
+        .event:hover{
+            background-color:#7da3bbb5;
+            border-color: rgb(25, 67, 218); 
+            transform: translateY(-5px); 
+        }
+        .event a {
+            font-size: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .event a:hover {
+            text-decoration: underline;
+        }
+
+        .event p {
+            margin: 5px 0;
+        
+        }
+        .event:hover .more-link {
+            color: red; 
+        }
+        h2{
+            text-align:center;
+            font-size:25px;
+            color: #186a9e;
+            padding-top:2%;
+            padding-bottom:2%;
+        }
+        .name{
+    
+            font-size: 20px;
+            font-weight:800;
+        }
+    </style>
+    
+    </head>
+           
+    <body>  
+        <%- include ('reusables/header')%>
+        <% if (action === 'add') { %>
+            <form class="form4" action="/Strathbud/SocialAmenities/Shops/newShop"  method="POST">
+                <div class="brand-logo"><img src="./reusables/unilogo.png"></div> 
+                <p class="brand-title">FILL THE FORM BELOW TO ADD A NEW SHOP</p>
+                    <div class="data">
+                        <label for="shopNo">Shop Number:</label>
+                        <input type="text" id="shopNo" name="shopNo">
+                    </div>
+                    <div class="data">
+                        <label for="shopName">Shop Name:</label>
+                        <input type="text" id="shopName" name="shopName">
+                    </div>
+                    <div class="data">
+                        <label for="servicesOffered">Services offered:</label>
+                        <textarea id="servicesOffered" name="servicesOffered" rows="5" cols="6"></textarea>
+                    </div>
+                    
+                    <div class="data">
+                        <label for="Location">Location:</label>
+                        <input type="text" id="Location" name="Location">
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            <% } else { %>
+                <h2>SHOPS  IN STRATHMORE</h2>
+                <% if (shopsData.length > 0) { %>
+
+                    <ul>
+                        <% shopsData.forEach(function(data) { %>
+                            <li class="event">
+                              
+                                <div class="name">
+                                   <%= data.shopName %>
+                                </div>
+                                <div>
+                                    <p>LOCATION: <%= data.Location %></p> 
+                                </div>
+                                <div>
+                                    <p>SERVICES OFFERED: <%= data.servicesOffered.substring(0, 100) %>... <a href="/Strathbud/SocialAmenities/Shops/<%= data.shopNo %>" class="more-link">more</a></p>
+                                </div>
+                            </li>
+                        <% }); %>
+                    </ul>
+                    <% } %>
+                    <% } %>
+            <%- include ('reusables/footer')%>
+            </body>
+            </html>
