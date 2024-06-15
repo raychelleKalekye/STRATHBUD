@@ -123,6 +123,8 @@
             padding-bottom:2%;
         }
         .name{
+    
+            font-size: 20px;
             font-weight:800;
         }
     </style>
@@ -132,28 +134,28 @@
     <body>  
         <%- include ('reusables/header')%>
         <% if (action === 'add') { %>
-            <form class="form4" action="/Strathbud/Events/newEvent" enctype="multipart/form-data" method="POST">
+            <form class="form4" action="/Strathbud/Sports/newSport"  method="POST">
                 <div class="brand-logo"><img src="./reusables/unilogo.png"></div> 
-                <p class="brand-title">FILL THE FORM BELOW TO ADD A NEW EVENT</p>
+                <p class="brand-title">FILL THE FORM BELOW TO ADD A NEW SPORT</p>
                     <div class="data">
-                        <label for="eventNo">Event Number:</label>
-                        <input type="text" id="eventNo" name="eventNo">
+                        <label for="sportsNo">Sports Number:</label>
+                        <input type="text" id="sportsNo" name="sportsNo">
                     </div>
                     <div class="data">
-                        <label for="eventName">Event Name:</label>
-                        <input type="text" id="eventName" name="eventName">
+                        <label for="sportsName">Sports Name:</label>
+                        <input type="text" id="sportsName" name="sportsName">
                     </div>
                     <div class="data">
-                        <label for="description">Description</label>
-                        <textarea id="description" name="description" rows="5" cols="6"></textarea>
+                        <label for="sportsLeader">Leader</label>
+                        <input type="text" id="sportsLeader" name="sportsLeader">
                     </div>
                     <div class="data">
-                        <label for="eventDate">Event Date</label>
-                        <input type="date" id="eventDate" name="eventDate">
+                        <label for="practiceDays">Practice days:</label>
+                        <input type="text" id="practiceDays" name="practiceDays">
                     </div>
                     <div class="data">
-                        <label for="poster">Poster</label>
-                        <input type="file" id="poster" name="poster">
+                        <label for="Registration_link">Registration link:</label>
+                        <input type="text" id="Registration_link" name="Registration_link">
                     </div>
                     <div class="data">
                         <label for="Location">Location:</label>
@@ -162,21 +164,21 @@
                     <button type="submit">Submit</button>
                 </form>
             <% } else { %>
-                <h2>AVAILABLE EVENTS</h2>
-                <% if (eventsData.length > 0) { %>
+                <h2>SPORTS OFFERED IN STRATHMORE</h2>
+                <% if (sportsData.length > 0) { %>
 
                     <ul>
-                        <% eventsData.forEach(function(data) { %>
+                        <% sportsData.forEach(function(data) { %>
                             <li class="event">
                               
                                 <div class="name">
-                                   <%= data.eventName %>
+                                   <%= data.sportsName %>
                                 </div>
                                 <div>
-                                    <p>DATE:<%= data.eventDate %></p>
+                                    <p>PRACTICE DAYS: <%= data.practiceDays %></p>
                                 </div>
                                 <div>
-                                    <p><%= data.description.substring(0, 100) %>... <a href="/Strathbud/Events/<%= data.eventNo %>" class="more-link">more</a></p>
+                                    <p>LOCATION: <%= data.Location %>... <a href="/Strathbud/Sports/<%= data.sportsNo %>" class="more-link">more</a></p>
                                 </div>
                             </li>
                         <% }); %>

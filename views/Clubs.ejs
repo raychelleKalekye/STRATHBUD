@@ -123,6 +123,8 @@
             padding-bottom:2%;
         }
         .name{
+    
+            font-size: 20px;
             font-weight:800;
         }
     </style>
@@ -132,55 +134,66 @@
     <body>  
         <%- include ('reusables/header')%>
         <% if (action === 'add') { %>
-            <form class="form4" action="/Strathbud/Events/newEvent" enctype="multipart/form-data" method="POST">
+            <form class="form4" action="/Strathbud/ClubsandSocieties/newClub"  method="POST">
                 <div class="brand-logo"><img src="./reusables/unilogo.png"></div> 
-                <p class="brand-title">FILL THE FORM BELOW TO ADD A NEW EVENT</p>
+                <p class="brand-title">FILL THE FORM BELOW TO ADD A NEW CLUB OR SOCIETY</p>
                     <div class="data">
-                        <label for="eventNo">Event Number:</label>
-                        <input type="text" id="eventNo" name="eventNo">
+                        <label for="clubNo">Club Number:</label>
+                        <input type="text" id="clubNo" name="clubNo">
                     </div>
                     <div class="data">
-                        <label for="eventName">Event Name:</label>
-                        <input type="text" id="eventName" name="eventName">
+                        <label for="clubName">Club Name:</label>
+                        <input type="text" id="clubName" name="clubName">
                     </div>
                     <div class="data">
-                        <label for="description">Description</label>
+                        <label for="clubLeader">Leader</label>
+                        <input type="text" id="clubLeader" name="clubLeader">
+                    </div>
+                    <div class="data">
+                        <label for="meetupDays">Meet Up days:</label>
+                        <input type="text" id="meetupDays" name="meetupDays">
+                    </div>
+                    <div class="data">
+                        <label for="description">Description: </label>
                         <textarea id="description" name="description" rows="5" cols="6"></textarea>
-                    </div>
-                    <div class="data">
-                        <label for="eventDate">Event Date</label>
-                        <input type="date" id="eventDate" name="eventDate">
-                    </div>
-                    <div class="data">
-                        <label for="poster">Poster</label>
-                        <input type="file" id="poster" name="poster">
                     </div>
                     <div class="data">
                         <label for="Location">Location:</label>
                         <input type="text" id="Location" name="Location">
                     </div>
+                    <div class="data">
+                        <label for="Email">Email:</label>
+                        <input type="email" id="Email" name="Email">
+                    </div>
                     <button type="submit">Submit</button>
                 </form>
             <% } else { %>
-                <h2>AVAILABLE EVENTS</h2>
-                <% if (eventsData.length > 0) { %>
+                <h2>CLUBS AND SOCIETIES IN STRATHMORE</h2>
+                <% if (clubsData.length > 0) { %>
 
                     <ul>
-                        <% eventsData.forEach(function(data) { %>
+                        <% clubsData.forEach(function(data) { %>
                             <li class="event">
-                              
                                 <div class="name">
-                                   <%= data.eventName %>
+                                    <%= data.clubName %>
                                 </div>
                                 <div>
-                                    <p>DATE:<%= data.eventDate %></p>
+                                    <p>MEETUP DAYS: <%= data.meetupDays %></p>
                                 </div>
                                 <div>
-                                    <p><%= data.description.substring(0, 100) %>... <a href="/Strathbud/Events/<%= data.eventNo %>" class="more-link">more</a></p>
+                                    <p>
+                                        <% if (data.description) { %>
+                                            <%= data.description.substring(0, 100) %>... 
+                                        <% } else { %>
+                                            No description available. 
+                                        <% } %>
+                                        <a href="/Strathbud/ClubsandSocieties/<%= data.clubNo %>" class="more-link">more</a>
+                                    </p>
                                 </div>
                             </li>
                         <% }); %>
                     </ul>
+                    
                     <% } %>
                     <% } %>
             <%- include ('reusables/footer')%>
