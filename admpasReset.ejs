@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+              body{
+                background: #ecf0f3;
+            }
+            .login_area{
+                border:4px solid salmon;
+                width:40%;
+                height:60vh;
+                margin-top:80px;
+                margin-left:340px;
+                background-color:#c85410c9;
+                margin-bottom:80px ;
+            }
+            .form1 div{
+                margin-top:15px;
+                margin-left:30px;
+            }
+            .form1 input{
+                padding: 10px 30px 10px 10px;
+            }
+            .form1 button{
+                padding:10px 10px 10px 10px;
+                margin-top:45px;
+                margin-left:15%;
+                background-color: transparent;
+                cursor:pointer;
+                
+            }
+            .form1 button:hover{
+                transition: 2s;
+                z-index: 2;
+                background-color: salmon;
+                
+            }
+            .login_area p{
+                margin-top:25px;
+                margin-left:25%;
+            }
+            .login_area a{
+                text-decoration:none;
+                color:black;
+            }
+            .login_area a:hover{
+                text-decoration: underline;
+                color:white;
+            }
+         
+        </style>
+    </head>
+    <body>
+        <%- include ('reusables/header')%>
+            <div class="login_area">
+                <form class="form1" action="/Strathbud/Admin/passwordReset" method="POST">
+                    <h2>PASSWORD RESET</h2>
+                    <p>Kindly input your Admin ID to ensure you are in the database </p>
+                    <div>
+                        <label for="AdmID">Search by Admin Number</label>
+                        <input type="text" id="AdmID" name="AdmID">
+                    </div>
+                    <button>SEARCH</button>
+            </div>
+        <%- include ('reusables/footer')%>
+        </form>
+    </body>
+</html>
