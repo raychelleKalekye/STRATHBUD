@@ -1,9 +1,8 @@
 const express = require('express');
 const connection = require('../database');
 const router = express.Router();
-const multer = require('multer');
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const multer=require('multer');
+const upload=multer({dest:'./public/imgs'});
 
 router.get('/', (req, res) => {
     var query = "SELECT * FROM clubsandsocieties";

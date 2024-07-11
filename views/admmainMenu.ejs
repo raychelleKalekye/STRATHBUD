@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{
+                background: #c8dfef;
+            }
+           .mid-area {
+              margin-top: 35px;
+              margin-bottom: 35px;
+              margin-left: 10%;
+              display: flex;
+              flex-wrap: wrap; 
+              justify-content: space-between; 
+            }
+
+            .mid-area div {
+                padding: 5% ;
+                margin-right: 40px;
+                margin-top: 35px;
+                margin-bottom: 35px;
+                width: calc(20% - 20px); 
+                font-size: 25px;
+                background-color: rgba(144, 18, 18, 0.447);
+                border-radius: 15px;
+            }
+            .mid-area div:hover{
+              transition:1s;
+              z-index: 2;
+              transform: translateY(-15px);
+              background-color:rgba(144, 18, 18, 0.925) ;
+            }
+            .mid-area a{
+              text-decoration: none;
+              color:black
+            }
+            
+          
+        </style>
+    </head>
+    <body>
+        <%- include ('reusables/header')%>
+      
+        <section class="mid-area">
+              <div>
+
+               <h3><a href="/Strathbud/Admin/admEvents">EVENTS</a></h3>
+              </div>
+              <div>
+             
+                 <h3><a href="/Strathbud/Admin/admSports">SPORTS</a></h3>
+              </div>
+              <div>
+          
+                <h3><a href="/Strathbud/ClubsandSocieties">CLUBS & SOCIEITIES</a></h3>
+              </div>
+              <div>
+                
+                <h3><a href="/Strathbud/Grievances">FEEDBACK AND GRIEVANCES</a></h3>
+              </div>
+              <div>
+                
+                <h3><a href="/Strathbud/SocialAmenities">SOCIAL AMENITIES</a></h3>
+              </div>
+              <div>
+             
+                <h3><a href="">UPCOMING PROJECTS</a></h3>
+              </div>
+              <div>
+             
+                <h3><a href="/Strathbud/Locations"> AVAILABLE LOCATIONS</a></h3>
+              </div>
+        </section>
+        <%- include ('reusables/footer')%>
+    </body>
+</html>

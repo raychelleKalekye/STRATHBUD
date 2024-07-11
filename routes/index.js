@@ -1,7 +1,9 @@
-const express=require('express')
-const connection=require('../database')
-const argon2 = require('argon2')
-const router=express.Router()
+const express = require('express');
+const connection = require('../database');
+const argon2 = require('argon2');
+const router = express.Router();
+const multer=require('multer');
+const upload=multer({dest:'./public/imgs'});
 
 router.get('/',(req,res)=>{
 
@@ -14,7 +16,7 @@ router.get('/Signup',(req,res)=>{
     res.render('Signup')
 })
 
-router.post('/signup', async (req, res) => {
+router.post('/Signup', async (req, res) => {
     const { AdmNo, fname, lname, password, confirm_Password } = req.body;
     
    
@@ -61,46 +63,49 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-router.get('/Login',(req,res)=>{
-    res.render('Login')
-})
 
+router.get('/Login', (req, res) => {
+    res.render('Login');
+});
 
 router.post('/Login', async (req, res) => {
+    console.log(req.sessionID);
     const AdmNo = req.body.AdmNo;
     const password = req.body.password;
+
+    if (AdmNo && password) {
+        if (req.session.authenticated) {
+            return res.json(req.session);
+        }
+    }
 
     const query = `SELECT * FROM students WHERE AdmNo = ?`;
     connection.query(query, [AdmNo], async (error, results) => {
         if (error) {
             console.error(error);
-            res.render('login', { error: 'An error occurred. Please try again later.' });
-            return;
+            return res.render('Login', { error: 'An error occurred. Please try again later.' });
         }
 
         if (results.length === 0) {
-            res.render('login', { error: 'Invalid admission number' });
-            return;
+            return res.render('Login', { error: 'Invalid admission number' });
         }
 
         const storedPassword = results[0].password;
 
         try {
-          
             if (!await argon2.verify(storedPassword, password)) {
-                res.render('login', { error: 'Incorrect password. Try again' });
-                return;
+                return res.render('Login', { error: 'Incorrect password. Try again' });
+            } else {
+                req.session.authenticated = true;
+                req.session.user = { AdmNo, password };
+                res.render('mainMenu');
             }
         } catch (err) {
             console.error(err);
-            res.render('login', { error: 'An error occurred. Please try again later.' });
-            return;
+            return res.render('Login', { error: 'An error occurred. Please try again later.' });
         }
-
-        res.redirect('/Strathbud/mainMenu');
     });
 });
-
 
 
 router.get('/passwordReset',(req,res)=>{

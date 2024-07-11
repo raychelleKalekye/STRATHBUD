@@ -1,9 +1,8 @@
 const express = require('express');
 const connection = require('../database');
 const router = express.Router();
-const multer = require('multer');
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const multer=require('multer');
+const upload=multer({dest:'./public/imgs'});
 
 router.get('/', (req, res) => {
     var query = "SELECT * FROM sports";
@@ -15,34 +14,6 @@ router.get('/', (req, res) => {
         }
     });
 });
-
-router.get('/newSport', (req, res) => {
-    res.render('Sports', { title: 'StrathBud Sports', action: 'add' });
-});
-router.post('/newSport', (req, res) => {
-    var sportsNo = req.body.sportsNo;
-    var sportsName = req.body.sportsName;
-    var sportsLeader = req.body.sportsLeader;
-    var practiceDays = req.body.practiceDays;
-    var registrationLink = req.body.Registration_link;
-    var Location = req.body.Location;
-
-    var query = `INSERT INTO sports (sportsNo, sportsName, sportsLeader, practiceDays, Registration_link, Location) VALUES (?, ?, ?, ?, ?, ?)`;
-
-    connection.query(query, [sportsNo, sportsName, sportsLeader, practiceDays, registrationLink, Location], function (error, results) {
-        if (error) {
-            console.error(error);
-            return res.status(500).send("Error adding sports");
-        } else {
-            res.send('<p>SPORT ADDED SUCCESSFULLY</p>');
-        }
-    });
-});
-
-
-
-
-
 
 
 router.get('/:sportsNo', (req, res) => {

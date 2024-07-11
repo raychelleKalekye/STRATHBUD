@@ -2,8 +2,7 @@ const express=require('express')
 const connection=require('../database')
 const router=express.Router()
 const multer=require('multer');
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload=multer({dest:'./public/imgs'});
 
 router.get('/',(req,res)=>{
     var query="SELECT eventNo,eventName,description,eventDate FROM schevents ORDER BY eventDate";
@@ -16,37 +15,6 @@ router.get('/',(req,res)=>{
     })
     
 })
-router.get('/newEvent',(req,res)=>{
-    res.render('events', { title: 'StrathBud Events', action: 'add'});
-})
-router.post('/newEvent', upload.single('poster'), (req, res) => {
-    console.log('File upload:', req.file); // Log the uploaded file
-
-    var eventNo = req.body.eventNo;
-    var eventName = req.body.eventName;
-    var description = req.body.description;
-    var eventDate = req.body.eventDate;
-    var Location = req.body.Location;
-    var poster;
-
-    if (req.file) {
-        poster = req.file.buffer.toString('base64'); // Convert file buffer to base64
-    } else {
-        console.error("No image file uploaded");
-        res.status(400).send("No image file uploaded");
-        return;
-    }
-
-    var query = `INSERT INTO schevents(eventNo, eventName, description, eventDate, poster, Location) VALUES(?, ?, ?, ?, ?, ?)`;
-    connection.query(query, [eventNo, eventName, description, eventDate, poster, Location], function(error, results) {
-        if (error) {
-            console.error(error);
-            res.status(500).send("Error adding event");
-        } else {
-            res.send('<p>EVENT ADDED SUCCESSFULLY</p>');
-        }
-    });
-});
 router.get('/:eventNo', (req, res) => {
     const eventNo = req.params.eventNo;
     const query = "SELECT eventNo, eventName,poster, description, eventDate, Location FROM schevents WHERE eventNo = ?";

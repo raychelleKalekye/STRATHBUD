@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+      
+    <head>
+                
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+        
+        .form4 {
+                position: relative;
+                width: 350px;
+                height: auto;
+                border-radius: 20px;
+                padding: 40px;
+                box-sizing: border-box;
+                background: #ecf0f3;
+                box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+                margin-left: 40%;
+                margin-top:5%;
+                margin-bottom:5%;
+        }
+        .data input{
+           color: red;
+           text-align: left;
+           margin-top: 30px;
+           background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+        }
+        .brand-logo {
+            height: 100px;
+            width: 100px;
+            
+            margin: auto;
+            border-radius: 50%;
+            box-sizing: border-box;
+            box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+            label {
+            margin-bottom: 4px;
+            }
+
+            label:nth-of-type(2) {
+            margin-top: 12px;
+            }
+        .brand-title {
+            margin-top: 10px;
+            font-weight: 400;
+            font-size: 1rem;
+            color: #1DA1F2;
+            letter-spacing: 1px;
+        }
+        button {
+            color: white;
+            margin-top: 20px;
+            background: #1DA1F2;
+            height: 40px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 900;
+            box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+            transition: 0.5s;
+            }
+
+            button:hover {
+            box-shadow: none;
+            }
+        .grievancebtn{
+            color: white;
+            margin-top: 5%;
+            margin-left: 10%;
+            background: #1DA1F2;
+            height: 40px;
+            width:250px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 900;
+            box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+            transition: 0.5s;
+        }
+        .grievancebtn:hover{
+            box-shadow: none;
+            transition:1s;
+              z-index: 2;
+              transform: translateY(-15px);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .event {
+            border: 1px solid #ccc;
+            margin: auto;
+            padding: 10px;
+            border-radius: 5px;
+            padding: 10px;
+            transition: border-color 0.3s, transform 0.3s;
+        
+        }
+        .event:hover{
+            background-color:#7da3bbb5;
+            border-color: rgb(25, 67, 218); 
+            transform: translateY(-5px); 
+        }
+        .event a {
+            font-size: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .event a:hover {
+            text-decoration: underline;
+        }
+
+        .event p {
+            margin: 5px 0;
+        
+        }
+        .event:hover .more-link {
+            color: red; 
+        }
+        h2{
+            text-align:center;
+            font-size:25px;
+            color: #186a9e;
+            padding-top:2%;
+            padding-bottom:2%;
+        }
+        .name{
+    
+            font-size: 20px;
+            font-weight:800;
+        }
+        .griev{
+            text-decoration: none;
+            color:white;
+        }
+        .post-ratings-container{
+            display:flex;
+            justify-content:end;
+            padding:12px 0;
+
+        }
+        .post-rating{
+            display:flex;
+            align-items: center;
+            cursor:pointer;
+        }
+        .post-rating:not(:last-child){
+            margin-right:12px;
+        }
+        .material-symbols-outlined{
+            margin-right:6px;
+            cursor:pointer;
+            color:#186a9e;
+        }
+      
+    </style>
+    
+    </head>
+           
+    <body>  
+        <%- include ('reusables/header')%>
+        <% if (action === 'add') { %>
+            <button class="grievancebtn"><a class="griev" href="/Strathbud/Grievances/otherGrievances">VIEW OTHER GRIEVANCES</a></button>
+            <form class="form4" action="/Strathbud/Grievances/"  method="POST">
+                <div class="brand-logo"><img src="./reusables/unilogo.png"></div> 
+                <p class="brand-title">FILL THE FORM BELOW TO ADD A GRIEVANCES</p>
+                    <div class="data">
+                        <label for="studentCouncilSector">Student Council Sector:</label>
+                        <select id="studentCouncilSector" name="studentCouncilSector">
+                            <option value="Public Relations">Public Relations</option>
+                            <option value="Academics">Academics</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                  
+                    <div class="data">
+                        <label for="Grievance">Grievance: </label>
+                        <textarea id="Grievance" name="Grievance" rows="15" cols="16"></textarea>
+                    </div>
+                    <p class="brand-title">PLEASE NOTE THAT YOUR ADMISSION NUMBER WILL NOT BE DISPLAYED.IT IS ANONYMOUS</p>
+                    <div class="data">
+                        <label for="admNo">admNo:</label>
+                        <input type="number" id="admNo" name="admNo">
+                    </div>
+               
+                    <button type="submit">Submit</button>
+                </form>
+                <% } else { %>
+                    <h2>STUDENT GRIEVANCES</h2>
+                    <% if (grievanceData.length > 0) { %>
+                        <ul>
+                            <% grievanceData.forEach(function(data) { %>
+                                <li class="event" data-post-id="<%= data.grievanceNo %>">
+                                    <div class="name">
+                                        <%= data.studentCouncilSector %>
+                                    </div>
+                                    <div>
+                                        <p>
+                                           
+                                                GRIEVANCE:<%= data.Grievance %>
+                                        
+                                            <a href="/Strathbud/Grievances/<%= data.grievanceNo %>" class="more-link">more</a>
+                                        </p>
+                                        <div class="post-ratings-container">
+                                            <div class="post-rating">
+                                                <span class="material-symbols-outlined">thumb_up</span>
+                                                <span class="post-rating-count"><%= data.likes %> </span>
+                                            </div>
+                                            <div class="post-rating">
+                                                <span class="material-symbols-outlined">thumb_down</span>
+                                                <span class="post-rating-count"><%= data.dislikes %> </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    <% } %>
+                <% } %>
+                <%- include ('reusables/footer')%>
+                <script>
+                    document.querySelectorAll(".event").forEach(post => {
+                        const postId = post.dataset.postId;
+                        const ratings = post.querySelectorAll(".post-rating");
+                        const likeRating = ratings[0];
+            
+                        ratings.forEach(rating => {
+                            const button = rating.querySelector(".material-symbols-outlined");
+                            const count = rating.querySelector(".post-rating-count");
+            
+                            button.addEventListener("click", async () => {
+                                if (rating.classList.contains("post-rating-selected")) {
+                                    return;
+                                }
+            
+                                count.textContent = Number(count.textContent) + 1;
+            
+                                ratings.forEach(rating => {
+                                    if (rating.classList.contains("post-rating-selected")) {
+                                        const count = rating.querySelector(".post-rating-count");
+            
+                                        count.textContent = Math.max(0, Number(count.textContent) - 1);
+                                        rating.classList.remove("post-rating-selected");
+                                    }
+                                });
+            
+                                rating.classList.add("post-rating-selected");
+            
+                                const likeOrDislike = likeRating === rating ? "like" : "dislike";
+                                const response = await fetch(`/Strathbud/Grievances/${postId}/${likeOrDislike}`, {
+                                    method: 'POST',
+                                });
+                                const body = await response.json();
+                            });
+                        });
+                    });
+                </script>
+        </body>
+     </html>
