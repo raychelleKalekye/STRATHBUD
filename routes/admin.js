@@ -5,7 +5,7 @@ const router = express.Router();
 
 const argon2 = require('argon2');
 const multer=require('multer');
-const upload=multer({dest:'./public/imgs'});
+const upload=multer({dest:'../public/imgs'});
 
 
 router.get('/', (req, res) => {
@@ -184,11 +184,12 @@ router.get('/admEvents',(req,res)=>{
     })
     
 })
-router.get('/admEvents/newEvent',(req,res)=>{
-    res.render('Admevents', { title: 'StrathBud Events', action: 'add'});
-})
+router.get('/admEvents/newEvent', (req, res) => {
+    res.render('Admevents', { title: 'StrathBud Events', action: 'add' });
+});
+
 router.post('/admEvents/newEvent', upload.single('poster'), (req, res) => {
-    console.log('File upload:', req.file); 
+    console.log('File upload:', req.file);
 
     var eventNo = req.body.eventNo;
     var eventName = req.body.eventName;
@@ -198,21 +199,32 @@ router.post('/admEvents/newEvent', upload.single('poster'), (req, res) => {
     var poster;
 
     if (req.file) {
-        poster = req.file.buffer.toString('base64'); 
+        poster = req.file.path; 
     } else {
         console.error("No image file uploaded");
         res.status(400).send("No image file uploaded");
         return;
     }
 
-    var query = `INSERT INTO schevents(eventNo, eventName, description, eventDate, poster, Location) VALUES(?, ?, ?, ?, ?, ?)`;
-    connection.query(query, [eventNo, eventName, description, eventDate, poster, Location], function(error, results) {
-        if (error) {
-            console.error(error);
-            res.status(500).send("Error adding event");
-        } else {
-            res.send('<p>EVENT ADDED SUCCESSFULLY</p>');
+  
+    const fs = require('fs');
+    fs.readFile(poster, (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            res.status(500).send('Error reading image file');
+            return;
         }
+        const base64Image = data.toString('base64');
+
+        var query = `INSERT INTO schevents(eventNo, eventName, description, eventDate, poster, Location) VALUES(?, ?, ?, ?, ?, ?)`;
+        connection.query(query, [eventNo, eventName, description, eventDate, base64Image, Location], function(error, results) {
+            if (error) {
+                console.error(error);
+                res.status(500).send("Error adding event");
+            } else {
+                res.send('<p>EVENT ADDED SUCCESSFULLY</p>');
+            }
+        });
     });
 });
 router.get('/admEvents/:eventNo', (req, res) => {
@@ -257,7 +269,26 @@ router.post('/admEvents/editEvent', upload.single('poster'), (req, res) => {
     const description = req.body.description;
     const eventDate = req.body.eventDate;
     const Location = req.body.Location;
-    const poster = req.file ? req.file.buffer.toString('base64') : null;
+    var poster;
+
+    if (req.file) {
+        poster = req.file.path; 
+    } else {
+        console.error("No image file uploaded");
+        res.status(400).send("No image file uploaded");
+        return;
+    }
+
+  
+    const fs = require('fs');
+    fs.readFile(poster, (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            res.status(500).send('Error reading image file');
+            return;
+        }
+        const base64Image = data.toString('base64');
+    });
 
     const query = "UPDATE schevents SET eventName = ?, description = ?, eventDate = ?, Location = ?, poster = ? WHERE eventNo = ?";
 
@@ -273,9 +304,7 @@ router.post('/admEvents/editEvent', upload.single('poster'), (req, res) => {
             res.redirect('/Strathbud/Admin/admEvents'); 
         }
     });
-});
-
-router.delete('/admEvents/deleteEvent/:eventNo', (req, res) => {
+});router.delete('/admEvents/deleteEvent/:eventNo', (req, res) => {
     const eventNo = req.params.eventNo;
     const query = "DELETE FROM schevents WHERE eventNo = ?";
 
@@ -289,6 +318,7 @@ router.delete('/admEvents/deleteEvent/:eventNo', (req, res) => {
         }
     });
 });
+
 router.get('/admSports', (req, res) => {
     var query = "SELECT * FROM sports";
     connection.query(query, function(error, data) {
@@ -301,7 +331,7 @@ router.get('/admSports', (req, res) => {
 });
 
 router.get('/admSports/newSport', (req, res) => {
-    res.render('Sports', { title: 'StrathBud Sports', action: 'add' });
+    res.render('admSports', { title: 'StrathBud Sports', action: 'add' });
 });
 router.post('/admSports/newSport', (req, res) => {
     var sportsNo = req.body.sportsNo;
@@ -341,7 +371,9 @@ router.get('/admSports/:sportsNo', (req, res) => {
     });
 });
 
-router.get('/admSports/editSport/:sportNo', (req, res) => {
+
+
+router.get('/admSports/editSport/:sportsNo', (req, res) => {
     const sportsNo = req.params.sportsNo;
     const query = "SELECT * FROM sports WHERE sportsNo = ?";
     
@@ -352,7 +384,7 @@ router.get('/admSports/editSport/:sportNo', (req, res) => {
         } else {
             if (data.length > 0) {
                 const sport = data[0]; 
-                res.render('admSports', { title: 'StrathBud Sports', action: 'edit', sportsData:sports });
+                res.render('admSports', { title: 'StrathBud Sports', action: 'edit', sportsData: sport });
             } else {
                 res.status(404).send('Sport not found');
             }
@@ -361,16 +393,18 @@ router.get('/admSports/editSport/:sportNo', (req, res) => {
 });
 
 router.post('/admSports/editSport', (req, res) => {
-    var sportsNo = req.body.sportsNo;
-    var sportsName = req.body.sportsName;
-    var sportsLeader = req.body.sportsLeader;
-    var practiceDays = req.body.practiceDays;
-    var registrationLink = req.body.Registration_link;
-    var Location = req.body.Location;
+    const sportsNo = req.body.sportsNo;
+    const sportsName = req.body.sportsName;
+    const sportsLeader = req.body.sportsLeader;
+    const practiceDays = req.body.practiceDays;
+    const registrationLink = req.body.Registration_link;
+    const Location = req.body.Location;
 
-    const query = "UPDATE sports SET sportsName = ?,sportsLeader=?, practiceDays = ?, Registration_link = ?, Location = ? WHERE eventNo = ?";
+    console.log("SPORTS NUMBER:", sportsNo); // Check if sportsNo is correctly received
 
-    connection.query(query, [sportsName, sportsLeader, practiceDays, Location,sportsNo], (error, results) => {
+    const query = "UPDATE sports SET sportsName = ?, sportsLeader = ?, practiceDays = ?, Registration_link = ?, Location = ? WHERE sportsNo = ?";
+
+    connection.query(query, [sportsName, sportsLeader, practiceDays, registrationLink, Location, sportsNo], (error, results) => {
         if (error) {
             console.error('Error updating sport:', error);
             res.status(500).send('Error updating sport');
@@ -379,16 +413,15 @@ router.post('/admSports/editSport', (req, res) => {
             res.status(404).send('No sport found with the specified sportsNo');
         } else {
             console.log("Sport updated successfully:", results);
-            res.redirect('/Strathbud/Admin/admSport'); 
+            res.redirect('/Strathbud/Admin/admSports'); 
         }
     });
 });
-
 router.delete('/admSports/deleteSport/:sportsNo', (req, res) => {
     const sportsNo = req.params.sportsNo;
     const query = "DELETE FROM sports WHERE sportsNo = ?";
 
-    connection.query(query, [sportsNoNo], (error, results) => {
+    connection.query(query, [sportsNo], (error, results) => {
         if (error) {
             console.error('Error deleting sport:', error);
             res.status(500).send('Error deleting sport');

@@ -206,13 +206,13 @@
                     </div>
                     <button type="submit">Submit</button>
                 </form>
-                <% }else if (action=='edit') {%>
+                <% } if (action == 'edit') { %>
                     <form class="form4" action="/Strathbud/Admin/admSports/editSport" enctype="multipart/form-data" method="POST">
                         <div class="brand-logo"><img src="./reusables/unilogo.png"></div> 
                         <p class="brand-title">FILL THE FORM BELOW TO EDIT A SPORT</p>
                         <div class="data">
                             <label for="sportsNo">Sport Number:</label>
-                            <input type="text" id="sportsNo" name="sportsNo" value="<%= sportsData.sportsNo %>">
+                            <input type="hidden" id="sportsNo" name="sportsNo" value="<%= sportsData.sportsNo %>">
                         </div>
                         <div class="data">
                             <label for="sportsName">Sports Name:</label>
@@ -224,17 +224,18 @@
                         </div>
                         <div class="data">
                             <label for="Registration_link">Registration link:</label>
-                            <input type="date" id="Registration_link" name="Registration_link" value="<%= sportsData.Registration_link %>">
+                            <input type="text" id="Registration_link" name="Registration_link" value="<%= sportsData.Registration_link %>">
                         </div>
-                      
                         <div class="data">
                             <label for="Location">Location:</label>
                             <input type="text" id="Location" name="Location" value="<%= sportsData.Location %>">
                         </div>
                         <button type="submit">Submit</button>
                     </form>
+                <% } else { %>
+                    
+             
                 
-            <% } else { %>
                 
                    
                 <h2>SPORTS OFFERED IN STRATHMORE</h2>

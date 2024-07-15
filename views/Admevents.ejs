@@ -227,9 +227,9 @@
                 </div>
                 <div class="data">
                     <label for="poster">Poster:</label>
-                    <input type="file" id="poster" name="poster">
+                    <input type="file" id="poster" name="poster" value="<%= eventsData.poster %>">
                 </div>
-                <div class="data">
+                <div class= "data">
                     <label for="Location">Location:</label>
                     <input type="text" id="Location" name="Location" value="<%= eventsData.Location %>">
                 </div>
@@ -267,27 +267,29 @@
             <% } %>
         
         <%- include ('reusables/footer') %>
-
-<script>
-    function deleteEvent(eventNo) {
-        if (confirm('Are you sure you want to delete this event?')) {
-            fetch(`/Strathbud/Admin/admEvents/deleteEvent/${eventNo}`, {
-                method: 'DELETE',
-            })
-            .then(response => {
-                if (response.ok) {
-                    document.getElementById(`event-${eventNo}`).remove();
-                } else {
-                    response.text().then(text => alert(text));
+        <script>
+            function deleteEvent(eventNo) {
+                if (confirm('Are you sure you want to delete this event?')) {
+                    fetch(`/Strathbud/Admin/admEvents/deleteEvent/${eventNo}`, {
+                        method: 'DELETE',
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Remove the event element from the DOM upon successful deletion
+                            document.getElementById(`event-${eventNo}`).remove();
+                        } else {
+                            // Handle non-200 status codes (error messages from the server)
+                            response.text().then(text => alert(text));
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error deleting event');
+                    });
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error deleting event');
-            });
-        }
-    }
-</script>
+            }
+        </script>
+        
     </body>
     </html>
     
