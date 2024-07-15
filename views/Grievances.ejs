@@ -28,12 +28,12 @@
            text-align: left;
            margin-top: 30px;
            background: #ecf0f3;
-  padding: 10px;
-  padding-left: 20px;
-  height: 50px;
-  font-size: 14px;
-  border-radius: 50px;
-  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+            padding: 10px;
+            padding-left: 20px;
+            height: 50px;
+            font-size: 14px;
+            border-radius: 50px;
+            box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
         }
         .brand-logo {
             height: 100px;
@@ -43,6 +43,12 @@
             border-radius: 50%;
             box-sizing: border-box;
             box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+        }
+        .brand-logo img{
+            width: 130px; /* Adjust the width as needed */
+                height: auto; /* Maintain aspect ratio */
+            
+               
         }
         label, input, button {
             display: block;
@@ -179,10 +185,11 @@
            
     <body>  
         <%- include ('reusables/header')%>
+        <%- include ('reusables/menu')%>
         <% if (action === 'add') { %>
             <button class="grievancebtn"><a class="griev" href="/Strathbud/Grievances/otherGrievances">VIEW OTHER GRIEVANCES</a></button>
             <form class="form4" action="/Strathbud/Grievances/"  method="POST">
-                <div class="brand-logo"><img src="./reusables/unilogo.png"></div> 
+                <div class="brand-logo"><img src="/imgs/logo 2.png" alt="Logo"></div> 
                 <p class="brand-title">FILL THE FORM BELOW TO ADD A GRIEVANCES</p>
                     <div class="data">
                         <label for="studentCouncilSector">Student Council Sector:</label>

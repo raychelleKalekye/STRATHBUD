@@ -91,13 +91,16 @@
     <body>
 
         <%- include ('reusables/header')%>
+        <%- include ('reusables/menu')%>
         <div class="container">
             <header class="event-header">
                 <h1><%= eventData.eventName %></h1>
             </header>
             <div class="event-details">
                 <div class="event-poster">
-                    <img src="data:image/jpeg;base64,<%= eventData.poster.toString('base64') %>" alt="<%= eventData.eventName %> Poster">
+                    <% if (eventData.poster) { %>
+                        <img src="data:image/png;base64,<%= eventData.poster %>" alt="Event Poster">
+                    <% } %>
                 </div>
                 <div class="event-info">
                     <p><strong>Date:</strong> <%= new Date(eventData.eventDate).toLocaleDateString() %></p>
